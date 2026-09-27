@@ -1,722 +1,305 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>环球行情 · 每日财经速览</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --border:#2a313c;
+    --text:#e6edf3; --muted:#8b949e; --up:#ff4d4f; --down:#00b96b; --flat:#8b949e;
+    --accent:#3b82f6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  .num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum";}
+  a{color:inherit;text-decoration:none;}
+
+  /* 顶部跑马灯 */
+  .ticker{
+    overflow:hidden;background:var(--panel2);border-bottom:1px solid var(--border);
+    padding:8px 0;font-size:13px;
+  }
+  .ticker-track{display:inline-flex;white-space:nowrap;animation:scroll 32s linear infinite;}
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  .ticker-item{margin:0 28px;color:var(--muted);}
+  .ticker-item b{color:var(--text);font-weight:600;}
+  .up{color:var(--up);} .down{color:var(--down);} .flat{color:var(--flat);}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* 头部 */
+  header{
+    max-width:1180px;margin:0 auto;padding:22px 20px 8px;
+    display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .logo{
+    width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,#3b82f6,#1e40af);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;
+  }
+  .brand h1{font-size:20px;font-weight:700;letter-spacing:.5px;}
+  .brand .sub{font-size:12px;color:var(--muted);}
+  .updated{font-size:12px;color:var(--muted);text-align:right;}
+  .updated b{color:var(--text);}
+
+  /* Tab */
+  nav{
+    max-width:1180px;margin:6px auto 0;padding:0 20px;
+    display:flex;gap:6px;border-bottom:1px solid var(--border);
+  }
+  .tab{
+    padding:12px 18px;font-size:15px;color:var(--muted);cursor:pointer;
+    border-bottom:2px solid transparent;transition:.15s;user-select:none;
+  }
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--text);border-bottom-color:var(--accent);font-weight:600;}
+
+  /* 主体 */
+  main{max-width:1180px;margin:0 auto;padding:22px 20px 40px;}
+  .indices{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:26px;
+  }
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;
+    transition:.15s;
+  }
+  .card:hover{border-color:#3a4452;transform:translateY(-1px);}
+  .card-name{font-size:13px;color:var(--muted);margin-bottom:6px;}
+  .card-val{font-size:26px;font-weight:700;letter-spacing:.5px;}
+  .card-chg{font-size:14px;margin-top:4px;font-weight:600;}
+  .card-chg .sub{color:var(--muted);font-weight:500;margin-left:6px;font-size:13px;}
+
+  .grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr;}}
+  .panel{
+    background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  }
+  .panel-head{
+    padding:14px 18px;border-bottom:1px solid var(--border);
+    font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;
+  }
+  .panel-head .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+
+  table{width:100%;border-collapse:collapse;}
+  th,td{padding:11px 18px;text-align:left;font-size:14px;border-bottom:1px solid var(--border);}
+  th{color:var(--muted);font-weight:500;font-size:12px;text-transform:none;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--panel2);}
+  td.right,th.right{text-align:right;}
+  .code{color:var(--muted);font-size:11px;margin-left:6px;}
+  .name-cell{font-weight:500;}
+
+  ul.news{list-style:none;}
+  ul.news li{padding:13px 18px;border-bottom:1px solid var(--border);}
+  ul.news li:last-child{border-bottom:none;}
+  ul.news li:hover{background:var(--panel2);}
+  .news .tag{
+    display:inline-block;font-size:11px;padding:2px 8px;border-radius:5px;
+    background:rgba(59,130,246,.15);color:#7cb3ff;margin-right:8px;vertical-align:middle;
+  }
+  .news .title{font-size:14px;vertical-align:middle;}
+  .news .meta{font-size:12px;color:var(--muted);margin-top:5px;}
+
+  footer{
+    max-width:1180px;margin:0 auto;padding:20px;color:var(--muted);font-size:12px;
+    border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  }
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+
+  <!-- 跑马灯 -->
+  <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
+
+  <!-- 头部 -->
+  <header>
+    <div class="brand">
+      <div class="logo">环</div>
+      <div>
+        <h1>环球行情</h1>
+        <div class="sub">每日财经速览 · A股 / 港股 / 美股</div>
+      </div>
+    </div>
+    <div class="updated">
+      数据截至 <b id="asof">2026-09-25 收盘</b><br>
+      本页为静态快照演示
+    </div>
+  </header>
+
+  <!-- 市场切换 -->
+  <nav id="nav">
+    <div class="tab active" data-m="astock">A 股</div>
+    <div class="tab" data-m="hkstock">港 股</div>
+    <div class="tab" data-m="usstock">美 股</div>
+  </nav>
+
+  <main>
+    <div class="indices" id="indices"></div>
+    <div class="grid2">
+      <div class="panel">
+        <div class="panel-head"><span class="dot"></span><span id="stockTitle">热门个股</span></div>
+        <table>
+          <thead><tr><th>名称</th><th class="right">最新价</th><th class="right">涨跌幅</th></tr></thead>
+          <tbody id="stocks"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><span class="dot"></span>财经要闻</div>
+        <ul class="news" id="news"></ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2026 环球行情 · 仅供信息展示，不构成投资建议</span>
+    <span>数据来源：示例静态快照（可对接公开行情接口）</span>
+  </footer>
+
+<script>
+  // ===== 静态快照数据（可替换为实时接口返回）=====
+  const DATA = {
+    astock: {
+      label: "A 股",
+      indices: [
+        {name:"上证指数", code:"SH000001", value:3215.67, change:12.34, pct:0.39},
+        {name:"深证成指", code:"SZ399001", value:10142.33, change:-45.21, pct:-0.44},
+        {name:"创业板指", code:"SZ399006", value:2048.12, change:8.76, pct:0.43},
+        {name:"沪深300",  code:"SH000300", value:3789.45, change:5.12, pct:0.14},
+        {name:"科创50",   code:"SH000688", value:982.34, change:-2.15, pct:-0.22}
+      ],
+      stocks: [
+        {name:"贵州茅台", code:"600519", value:1685.00, pct:1.21},
+        {name:"宁德时代", code:"300750", value:228.50, pct:-0.85},
+        {name:"比亚迪",   code:"002594", value:312.40, pct:0.66},
+        {name:"中国平安", code:"601318", value:48.30, pct:-0.31},
+        {name:"招商银行", code:"600036", value:39.85, pct:0.50},
+        {name:"东方财富", code:"300059", value:15.62, pct:2.10}
+      ],
+      news: [
+        {tag:"宏观", title:"央行公开市场净投放，资金面边际转松", source:"财联社", time:"09-25"},
+        {tag:"政策", title:"证监会：持续推动中长期资金入市", source:"证券时报", time:"09-25"},
+        {tag:"行业", title:"新能源板块估值修复，机构看好四季度", source:"上海证券报", time:"09-24"},
+        {tag:"资金", title:"北向资金当日净流入 38.6 亿元", source:"东方财富", time:"09-25"},
+        {tag:"公司", title:"多家龙头企业披露三季度业绩预喜", source:"中国证券报", time:"09-24"}
+      ]
+    },
+    hkstock: {
+      label: "港 股",
+      indices: [
+        {name:"恒生指数",   code:"HSI",   value:18234.56, change:112.45, pct:0.62},
+        {name:"恒生科技",   code:"HSTECH",value:4123.78, change:42.88, pct:1.05},
+        {name:"国企指数",   code:"HSCEI", value:6356.21, change:34.76, pct:0.55}
+      ],
+      stocks: [
+        {name:"腾讯控股", code:"00700", value:412.80, pct:1.32},
+        {name:"美团",     code:"03690", value:158.30, pct:0.88},
+        {name:"阿里巴巴", code:"09988", value:96.45, pct:-0.42},
+        {name:"小米集团", code:"01810", value:28.65, pct:2.15},
+        {name:"快手",     code:"01024", value:58.20, pct:-1.10},
+        {name:"京东集团", code:"09618", value:142.10, pct:0.55}
+      ],
+      news: [
+        {tag:"大盘", title:"恒生指数重返18000点，科技股领涨", source:"香港经济日报", time:"09-25"},
+        {tag:"资金", title:"南向资金持续加仓港股核心资产", source:"智通财经", time:"09-25"},
+        {tag:"利率", title:"香港金管局维持基准利率不变", source:"明报", time:"09-24"},
+        {tag:"行业", title:"本地零售回暖，消费板块获资金关注", source:"信报", time:"09-23"}
+      ]
+    },
+    usstock: {
+      label: "美 股",
+      indices: [
+        {name:"道琼斯",   code:"DJI",  value:42150.33, change:-50.21, pct:-0.12},
+        {name:"纳斯达克", code:"IXIC", value:17980.45, change:151.32, pct:0.85},
+        {name:"标普500",  code:"SPX",  value:5763.21, change:21.84, pct:0.38}
+      ],
+      stocks: [
+        {name:"苹果",   code:"AAPL", value:229.87, pct:0.45},
+        {name:"英伟达", code:"NVDA", value:142.35, pct:3.20},
+        {name:"微软",   code:"MSFT", value:418.60, pct:-0.32},
+        {name:"特斯拉", code:"TSLA", value:265.40, pct:1.78},
+        {name:"亚马逊", code:"AMZN", value:186.20, pct:0.92},
+        {name:"谷歌",   code:"GOOGL",value:168.45, pct:-0.55}
+      ],
+      news: [
+        {tag:"宏观", title:"美联储理事暗示年内或再降息一次", source:"Reuters", time:"09-24"},
+        {tag:"市场", title:"美股科技股走强，纳指创阶段新高", source:"CNBC", time:"09-25"},
+        {tag:"数据", title:"非农数据低于预期，市场押注宽松", source:"Bloomberg", time:"09-24"},
+        {tag:"公司", title:"大型科技股盘后公布最新财报指引", source:"WSJ", time:"09-23"}
+      ]
+    }
+  };
+
+  const colorClass = p => p > 0 ? "up" : p < 0 ? "down" : "flat";
+  const arrow = p => p > 0 ? "▲" : p < 0 ? "▼" : "—";
+  const sign = p => p > 0 ? "+" : "";
+
+  // 渲染指数卡片
+  function renderIndices(m){
+    const el = document.getElementById("indices");
+    el.innerHTML = m.indices.map(i => `
+      <div class="card">
+        <div class="card-name">${i.name} <span class="code">${i.code}</span></div>
+        <div class="card-val num">${i.value.toFixed(2)}</div>
+        <div class="card-chg num ${colorClass(i.pct)}">
+          ${arrow(i.pct)} ${sign(i.pct)}${i.pct.toFixed(2)}%
+          <span class="sub num">${sign(i.change)}${i.change.toFixed(2)}</span>
         </div>
-    </header>
+      </div>`).join("");
+  }
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+  // 渲染个股表
+  function renderStocks(m){
+    const el = document.getElementById("stocks");
+    document.getElementById("stockTitle").textContent = m.label + "热门个股";
+    el.innerHTML = m.stocks.map(s => `
+      <tr>
+        <td class="name-cell">${s.name}<span class="code">${s.code}</span></td>
+        <td class="right num">${s.value.toFixed(2)}</td>
+        <td class="right num ${colorClass(s.pct)}">${arrow(s.pct)} ${sign(s.pct)}${s.pct.toFixed(2)}%</td>
+      </tr>`).join("");
+  }
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  // 渲染要闻
+  function renderNews(m){
+    const el = document.getElementById("news");
+    el.innerHTML = m.news.map(n => `
+      <li>
+        <span class="tag">${n.tag}</span><span class="title">${n.title}</span>
+        <div class="meta">${n.source} · ${n.time}</div>
+      </li>`).join("");
+  }
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  // 跑马灯（所有市场指数拼在一起，复制一份实现无缝滚动）
+  function renderTicker(){
+    const items = [];
+    Object.values(DATA).forEach(m => m.indices.forEach(i => {
+      items.push(`<span class="ticker-item"><b>${i.name}</b> <span class="num">${i.value.toFixed(2)}</span> <span class="${colorClass(i.pct)} num">${arrow(i.pct)} ${sign(i.pct)}${i.pct.toFixed(2)}%</span></span>`);
+    }));
+    const html = items.join("");
+    document.getElementById("ticker").innerHTML = html + html;
+  }
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+  // Tab 切换
+  function select(market){
+    const m = DATA[market];
+    renderIndices(m); renderStocks(m); renderNews(m);
+    document.querySelectorAll(".tab").forEach(t =>
+      t.classList.toggle("active", t.dataset.m === market));
+  }
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+  document.getElementById("nav").addEventListener("click", e => {
+    const t = e.target.closest(".tab");
+    if (t) select(t.dataset.m);
+  });
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+  // 初始化
+  renderTicker();
+  select("astock");
+</script>
 </body>
-
 </html>
